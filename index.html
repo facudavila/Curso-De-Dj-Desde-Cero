@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DJ Academy — Facu Davila | Curso de DJ Online</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #1A1025;
+    --bg-soft: #221531;
+    --surface: #2A1A3D;
+    --surface-line: rgba(247,242,255,0.10);
+    --coral: #FF5D73;
+    --coral-deep: #E84362;
+    --amber: #FFB23E;
+    --teal: #3FD6C5;
+    --text: #F7F2FF;
+    --text-muted: #B8A9D0;
+    --text-dim: #8C7AA8;
+
+    --display: 'Unbounded', sans-serif;
+    --body: 'Plus Jakarta Sans', sans-serif;
+    --mono: 'Space Mono', monospace;
+
+    --maxw: 1120px;
+    --radius: 18px;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img,svg{ display:block; max-width:100%; }
+  a{ color:inherit; text-decoration:none; }
+  ul{ list-style:none; }
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  h1,h2,h3{ font-family:var(--display); line-height:1.05; letter-spacing:-0.01em; }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--amber);
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:7px; height:7px;
+    border-radius:50%;
+    background:var(--amber);
+    box-shadow:0 0 0 4px rgba(255,178,62,0.18);
+  }
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    font-family:var(--body);
+    font-weight:700;
+    font-size:16px;
+    padding:16px 32px;
+    border-radius:100px;
+    border:none;
+    cursor:pointer;
+    transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg, var(--coral) 0%, var(--coral-deep) 100%);
+    color:#fff;
+    box-shadow:0 10px 30px -8px rgba(255,93,115,0.55);
+  }
+  .btn-primary:hover{ transform:translateY(-2px); filter:brightness(1.06); }
+  .btn-ghost{
+    background:transparent;
+    color:var(--text);
+    border:1.5px solid var(--surface-line);
+  }
+  .btn-ghost:hover{ border-color:var(--amber); color:var(--amber); }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(26,16,37,0.78);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--surface-line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 24px;
+    max-width:var(--maxw); margin:0 auto;
+  }
+  .logo{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:17px;
+    letter-spacing:0.02em;
+  }
+  .logo span{ color:var(--coral); }
+  nav .btn{ padding:11px 22px; font-size:14px; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:96px 0 80px;
+    overflow:hidden;
+  }
+  .hero-glow{
+    position:absolute; inset:-20% -10% auto -10%; height:140%;
+    background:
+      radial-gradient(circle at 18% 20%, rgba(255,93,115,0.32), transparent 42%),
+      radial-gradient(circle at 82% 12%, rgba(255,178,62,0.26), transparent 40%),
+      radial-gradient(circle at 55% 75%, rgba(63,214,197,0.20), transparent 45%);
+    filter:blur(40px);
+    animation:driftGlow 18s ease-in-out infinite alternate;
+    pointer-events:none;
+    z-index:0;
+  }
+  @keyframes driftGlow{
+    0%{ transform:translate3d(0,0,0) scale(1); }
+    100%{ transform:translate3d(-2%,3%,0) scale(1.08); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero-glow{ animation:none; }
+  }
+
+  .hero-inner{ position:relative; z-index:1; max-width:760px; }
+  .hero h1{
+    font-size:clamp(38px, 6vw, 64px);
+    font-weight:800;
+    margin-bottom:22px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    background:linear-gradient(100deg, var(--amber), var(--coral));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero p.lead{
+    font-size:19px;
+    color:var(--text-muted);
+    max-width:560px;
+    margin-bottom:38px;
+  }
+  .hero-cta{ display:flex; gap:14px; flex-wrap:wrap; align-items:center; margin-bottom:30px; }
+  .trust-strip{
+    display:flex; flex-wrap:wrap; gap:22px;
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--text-dim);
+  }
+  .trust-strip span{ display:flex; align-items:center; gap:8px; }
+  .trust-strip span::before{ content:"✓"; color:var(--teal); font-weight:700; }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{ padding:88px 0; position:relative; }
+  .section-head{ max-width:640px; margin-bottom:52px; }
+  .section-head h2{ font-size:clamp(28px,4vw,40px); font-weight:700; margin-bottom:16px; }
+  .section-head p{ color:var(--text-muted); font-size:17px; }
+
+  /* ---------- PARA QUIÉN ---------- */
+  .who-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+  }
+  .who-card{
+    background:var(--surface);
+    border:1px solid var(--surface-line);
+    border-radius:var(--radius);
+    padding:28px 26px;
+  }
+  .who-card .mark{
+    font-family:var(--mono); color:var(--teal); font-size:13px;
+    display:block; margin-bottom:14px;
+  }
+  .who-card p{ font-size:15.5px; color:var(--text); }
+
+  /* ---------- CURRICULUM ---------- */
+  .curriculum-list{ display:flex; flex-direction:column; }
+  .module{
+    display:grid;
+    grid-template-columns:90px 1fr;
+    gap:28px;
+    padding:30px 0;
+    border-top:1px solid var(--surface-line);
+  }
+  .module:first-child{ border-top:1px solid var(--surface-line); }
+  .module-num{
+    font-family:var(--mono);
+    font-size:14px;
+    color:var(--text-dim);
+    padding-top:4px;
+  }
+  .module-num b{
+    display:block;
+    font-family:var(--display);
+    font-size:30px;
+    color:var(--amber);
+    -webkit-text-stroke:0;
+  }
+  .module h3{ font-size:20px; font-weight:700; margin-bottom:8px; }
+  .module p{ color:var(--text-muted); font-size:15.5px; max-width:560px; }
+
+  /* ---------- GARANTÍA (signature) ---------- */
+  .guarantee{
+    background:radial-gradient(circle at 30% 30%, rgba(255,178,62,0.08), transparent 60%), var(--bg-soft);
+    border-top:1px solid var(--surface-line);
+    border-bottom:1px solid var(--surface-line);
+  }
+  .guarantee-inner{
+    display:grid;
+    grid-template-columns:220px 1fr;
+    gap:56px;
+    align-items:center;
+  }
+  .vinyl{
+    width:200px; height:200px;
+    border-radius:50%;
+    position:relative;
+    flex-shrink:0;
+    background:
+      repeating-radial-gradient(circle, rgba(247,242,255,0.05) 0 2px, transparent 2px 7px),
+      #160B20;
+    box-shadow:0 25px 60px -15px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(247,242,255,0.06);
+    animation:spinVinyl 14s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce){ .vinyl{ animation:none; } }
+  @keyframes spinVinyl{ from{ transform:rotate(0deg); } to{ transform:rotate(360deg); } }
+  .vinyl-label{
+    position:absolute; top:50%; left:50%;
+    width:108px; height:108px;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--amber), var(--coral));
+    display:flex; align-items:center; justify-content:center;
+    text-align:center;
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,0.15);
+  }
+  .vinyl-label span{
+    font-family:var(--mono);
+    font-weight:700;
+    font-size:11px;
+    letter-spacing:0.06em;
+    color:#1A1025;
+    line-height:1.3;
+  }
+  .vinyl::after{
+    content:"";
+    position:absolute; top:50%; left:50%;
+    width:10px; height:10px;
+    background:var(--bg);
+    border-radius:50%;
+    transform:translate(-50%,-50%);
+  }
+  .guarantee-copy h2{ font-size:clamp(26px,3.6vw,36px); font-weight:700; margin-bottom:16px; }
+  .guarantee-copy p{ color:var(--text-muted); font-size:16.5px; max-width:560px; margin-bottom:10px; }
+  .guarantee-copy .fineprint{ font-family:var(--mono); font-size:12.5px; color:var(--text-dim); margin-top:14px; }
+
+  /* ---------- INSTRUCTOR ---------- */
+  .instructor{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:56px;
+    align-items:center;
+  }
+  .instructor-photo{
+    aspect-ratio:4/5;
+    border-radius:var(--radius);
+    background:var(--surface);
+    border:1px solid var(--surface-line);
+    overflow:hidden;
+  }
+  .instructor h2{ font-size:clamp(26px,3.6vw,34px); margin-bottom:14px; }
+  .instructor p{ color:var(--text-muted); font-size:16.5px; margin-bottom:14px; }
+  .genre-tags{ display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
+  .genre-tags + .genre-tags{ margin-top:10px; }
+  .genre-tags span{
+    font-family:var(--mono); font-size:12px;
+    border:1px solid var(--surface-line);
+    border-radius:100px;
+    padding:7px 14px;
+    color:var(--teal);
+  }
+
+  /* ---------- PRICING ---------- */
+  .pricing-card{
+    max-width:520px;
+    margin:0 auto;
+    background:linear-gradient(165deg, var(--surface), var(--bg-soft));
+    border:1px solid var(--surface-line);
+    border-radius:24px;
+    padding:44px 40px;
+    text-align:center;
+    box-shadow:0 30px 70px -25px rgba(0,0,0,0.55);
+  }
+  .pricing-card .eyebrow{ justify-content:center; }
+  .price{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:54px;
+    margin:6px 0 4px;
+  }
+  .price small{ font-family:var(--body); font-size:15px; color:var(--text-dim); font-weight:500; }
+  .price-note{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--amber);
+    margin-bottom:26px;
+  }
+  .pricing-list{ text-align:left; margin:30px 0 32px; display:flex; flex-direction:column; gap:13px; }
+  .pricing-list li{ display:flex; gap:10px; font-size:15.5px; color:var(--text); }
+  .pricing-list li::before{ content:"✓"; color:var(--teal); font-weight:700; }
+  .pricing-card .btn{ width:100%; }
+  .pricing-note{ font-family:var(--mono); font-size:12px; color:var(--text-dim); margin-top:16px; }
+
+  /* ---------- FAQ ---------- */
+  .faq-list{ max-width:760px; }
+  details{
+    border-top:1px solid var(--surface-line);
+    padding:22px 0;
+  }
+  details:last-child{ border-bottom:1px solid var(--surface-line); }
+  summary{
+    cursor:pointer;
+    font-weight:700;
+    font-size:17px;
+    list-style:none;
+    display:flex; justify-content:space-between; align-items:center;
+    gap:16px;
+  }
+  summary::-webkit-details-marker{ display:none; }
+  summary::after{
+    content:"+";
+    font-family:var(--mono);
+    font-size:22px;
+    color:var(--amber);
+    flex-shrink:0;
+    transition:transform .2s ease;
+  }
+  details[open] summary::after{ transform:rotate(45deg); }
+  details p{ color:var(--text-muted); margin-top:14px; font-size:15.5px; max-width:600px; }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    border-top:1px solid var(--surface-line);
+    padding:46px 0;
+  }
+  .footer-inner{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;
+  }
+  footer .logo{ font-size:15px; }
+  footer .meta{ font-family:var(--mono); font-size:12px; color:var(--text-dim); }
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible, summary:focus-visible{
+    outline:2px solid var(--teal);
+    outline-offset:3px;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 860px){
+    .who-grid{ grid-template-columns:1fr; }
+    .guarantee-inner{ grid-template-columns:1fr; text-align:center; }
+    .guarantee-copy p{ margin-left:auto; margin-right:auto; }
+    .vinyl{ margin:0 auto; }
+    .instructor{ grid-template-columns:1fr; }
+    .instructor-photo{ aspect-ratio:16/10; }
+    .module{ grid-template-columns:56px 1fr; }
+  }
+  @media (max-width: 520px){
+    .hero{ padding:64px 0 56px; }
+    section{ padding:64px 0; }
+    nav .btn span{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">FACU DAVILA <span>· DJ ACADEMY</span></div>
+    <a href="https://pay.hotmart.com/P106025203N" target="_blank" rel="noopener" class="btn btn-primary"><span>Quiero empezar</span></a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="wrap hero-inner">
+    <div class="eyebrow">Academia DJ online</div>
+    <h1>Mezclá como si lo hubieras hecho <em>toda la vida</em>.</h1>
+    <p class="lead">
+      El curso para arrancar con el DDJ-400 y el RX3, dominar Rekordbox de una vez
+      y armar tu primer set profesional — sin vueltas, paso a paso.
+    </p>
+    <div class="hero-cta">
+      <a href="https://pay.hotmart.com/P106025203N" target="_blank" rel="noopener" class="btn btn-primary">Quiero empezar</a>
+      <a href="#temario" class="btn btn-ghost">Ver el temario</a>
+    </div>
+    <div class="trust-strip">
+      <span>12 clases en video</span>
+      <span>Acceso de por vida</span>
+    </div>
+  </div>
+</section>
+
+<section id="para-quien">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">¿Es para mí?</div>
+      <h2>Este curso es para vos si...</h2>
+    </div>
+    <div class="who-grid">
+      <div class="who-card">
+        <span class="mark">→ Recién arrancás</span>
+        <p>Nunca tocaste un controlador y querés aprender bien desde el día uno, sin vicios que después hay que corregir.</p>
+      </div>
+      <div class="who-card">
+        <span class="mark">→ Ya mezclás solo</span>
+        <p>Aprendiste mirando videos sueltos y ahora querés ordenar todo lo que sabés en un sistema que tenga sentido.</p>
+      </div>
+      <div class="who-card">
+        <span class="mark">→ Querés subir de nivel</span>
+        <p>Buscás pasar de tocar en tu cuarto a armar un set que se banque una cabina real, de principio a fin.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="temario">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Temario</div>
+      <h2>12 clases. Un solo camino, sin relleno.</h2>
+      <p>Todo lo que ves acá lo vas a usar en tu próximo set — sin vueltas.</p>
+    </div>
+    <div class="curriculum-list">
+      <div class="module">
+        <div class="module-num"><b>01</b>Fundamentos</div>
+        <div>
+          <h3>Fundamentos</h3>
+          <p>Todos los botones y perillas, uno por uno. Vas a saber para qué sirve cada control antes de tocar tu primer track.</p>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-num"><b>02</b>Hotcues</div>
+        <div>
+          <h3>Hotcues</h3>
+          <p>Marcá los puntos clave de cada track y saltá a ellos al instante — la base para armar cualquier transición con seguridad.</p>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-num"><b>03</b>Loops</div>
+        <div>
+          <h3>Loops</h3>
+          <p>Estirá cualquier parte de una canción para ganar tiempo, generar tensión o salvar una transición que no te cierra.</p>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-num"><b>04</b>Beatjump</div>
+        <div>
+          <h3>Beatjump</h3>
+          <p>Movete dentro del track sin perder el compás, para ajustar la mezcla sobre la marcha.</p>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-num"><b>05</b>Sync</div>
+        <div>
+          <h3>Sync</h3>
+          <p>Cuándo usarlo y cuándo no — y por qué entender el BPM a mano te hace mejor DJ aunque tengas la ayuda del software.</p>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-num"><b>06</b>Efectos</div>
+        <div>
+          <h3>Efectos</h3>
+          <p>Filtros, reverb, eco y compañía: cómo usarlos para darle textura a tu set sin saturar la mezcla.</p>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-num"><b>07</b>Estructura</div>
+        <div>
+          <h3>Estructuras de una canción</h3>
+          <p>Intro, breakdown, drop, outro: aprendé a leer un track para saber exactamente dónde mezclarlo.</p>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-num"><b>08</b>Mezcla</div>
+        <div>
+          <h3>Mezcla de música electrónica</h3>
+          <p>Transiciones largas, lectura de energía y cómo armar un recorrido que no pierda al público.</p>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-num"><b>09</b>Electrónica</div>
+        <div>
+          <h3>Especialización en música electrónica</h3>
+          <p>Profundizamos en Organic, Melodic y Progressive House — el terreno en el que me especializo hace más de 10 años.</p>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-num"><b>10</b>Cachengue</div>
+        <div>
+          <h3>Especialización en cachengue y ritmos latinos</h3>
+          <p>Cómo adaptar todo lo aprendido a una pista que pide cachengue, RKT y ritmos latinos — la otra mitad de tocar en vivo en Argentina.</p>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-num"><b>11</b>Rekordbox</div>
+        <div>
+          <h3>Orden en Rekordbox y armado de playlists</h3>
+          <p>Biblioteca organizada, tracks analizados y playlists armadas — para llegar a cualquier evento sin perder tiempo buscando un tema.</p>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-num"><b>12</b>Bonus</div>
+        <div>
+          <h3>Armonía y la rueda de Camelot</h3>
+          <p>Por qué algunos tracks pegan entre sí y otros no, y cómo elegir el próximo tema sin romper el groove.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="guarantee">
+  <div class="wrap guarantee-inner">
+    <div class="vinyl">
+      <div class="vinyl-label"><span>ACCESO<br>DE POR VIDA</span></div>
+    </div>
+    <div class="guarantee-copy">
+      <div class="eyebrow">Sin vencimiento</div>
+      <h2>Una vez que entrás, es tuyo para siempre.</h2>
+      <p>
+        Mirá las clases las veces que quieras, cuando quieras — a tu ritmo, sin presión de horarios ni fechas límite.
+        Si más adelante sumo contenido nuevo al curso, también lo vas a tener, sin pagar de nuevo.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="instructor">
+  <div class="wrap instructor">
+    <div class="instructor-photo">
+      <img src="facu-cabina.jpg" alt="Facu Davila tocando en cabina" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius);">
+    </div>
+    <div>
+      <div class="eyebrow">Quién te lo enseña</div>
+      <h2>Facu Davila</h2>
+      <p>
+        Más de 10 años arriba de una cabina. Mi sonido se mueve entre el Organic,
+        el Melodic y el Progressive House — y este curso es el mismo método que uso
+        para preparar mis propios sets, bajado a algo que podés seguir paso a paso.
+      </p>
+      <p>
+        Además, soy especialista en ritmos sociales: toco en casamientos, cumpleaños
+        y fiestas privadas, así que también te enseño a leer una pista que no es la de un club.
+      </p>
+      <div class="genre-tags">
+        <span>Organic House</span>
+        <span>Melodic House</span>
+        <span>Progressive House</span>
+      </div>
+      <div class="genre-tags">
+        <span>Casamientos</span>
+        <span>Cumpleaños</span>
+        <span>Eventos privados</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="precio">
+  <div class="wrap">
+    <div class="section-head" style="margin:0 auto 52px; text-align:center;">
+      <div class="eyebrow" style="justify-content:center;">Inversión</div>
+      <h2>Todo lo que necesitás para arrancar, en un solo lugar.</h2>
+    </div>
+
+    <div class="pricing-card">
+      <div class="eyebrow">Acceso completo</div>
+      <div class="price">$39.999<small> ARS</small></div>
+      <div class="price-note">Precio de lanzamiento — sube a $79.999 a partir de agosto</div>
+      <ul class="pricing-list">
+        <li>12 clases en video, a tu ritmo</li>
+        <li>DDJ-400, RX3 y Rekordbox de cero a profesional</li>
+        <li>Clase de mezcla armónica y rueda de Camelot</li>
+        <li>Acceso de por vida a las actualizaciones</li>
+      </ul>
+      <!-- EDITAR: reemplazar # por tu link real de checkout de Hotmart -->
+      <a href="https://pay.hotmart.com/P106025203N" target="_blank" rel="noopener" class="btn btn-primary">Quiero empezar ahora</a>
+      <div class="pricing-note">Pago seguro a través de Hotmart</div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Preguntas frecuentes</div>
+      <h2>Antes de que te quedes con dudas</h2>
+    </div>
+    <div class="faq-list">
+      <details>
+        <summary>¿Necesito tener mi propio controlador?</summary>
+        <p>No es obligatorio para empezar a ver las clases, pero vas a aprovechar mucho más el curso si podés practicar con un DDJ-400 o equipo similar mientras avanzás.</p>
+      </details>
+      <details>
+        <summary>¿Funciona si nunca mezclé en mi vida?</summary>
+        <p>Sí. La clase 1 está pensada para arrancar desde cero, entendiendo el equipo antes de tocar un solo track.</p>
+      </details>
+      <details>
+        <summary>¿Tengo un tiempo límite para terminarlo?</summary>
+        <p>No. El acceso es de por vida, así que avanzás a tu ritmo y podés volver a cualquier clase cuando lo necesites.</p>
+      </details>
+      <details>
+        <summary>¿Las clases quedan disponibles para siempre?</summary>
+        <p>Sí. El acceso es de por vida: las podés volver a ver cuando quieras, las veces que quieras, sin fecha de vencimiento.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div class="logo">FACU DAVILA <span>· DJ ACADEMY</span></div>
+    <!-- EDITAR: poner tu @ real de Instagram -->
+    <div class="meta">@tu_instagram · © 2026 Facu Davila</div>
+  </div>
+</footer>
+
+</body>
+</html>
